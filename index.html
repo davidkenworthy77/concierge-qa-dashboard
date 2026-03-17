@@ -35,73 +35,40 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 
 /* Sidebar */
 .sidebar {
-  width: 240px;
-  background: var(--navy);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 100;
+  width: 240px; background: var(--navy); color: #fff;
+  display: flex; flex-direction: column;
+  position: fixed; top: 0; left: 0; bottom: 0; z-index: 100;
 }
-.sidebar-logo {
-  padding: 20px 20px 16px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
-}
-.sidebar-logo h1 {
-  font-size: 16px;
-  font-weight: 700;
-  color: #fff;
-}
+.sidebar-logo { padding: 20px 20px 16px; border-bottom: 1px solid rgba(255,255,255,0.08); }
+.sidebar-logo h1 { font-size: 16px; font-weight: 700; color: #fff; }
 .sidebar-logo h1 span { color: var(--primary-light); }
 .sidebar-logo .subtitle { font-size: 11px; color: rgba(255,255,255,0.4); margin-top: 2px; }
-
 .sidebar-nav { padding: 12px 0; flex: 1; }
 .nav-section { padding: 0 12px; margin-bottom: 8px; }
 .nav-section-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: rgba(255,255,255,0.3); padding: 8px 8px 4px; }
 .nav-item {
   display: flex; align-items: center; gap: 10px;
   padding: 9px 12px; border-radius: 8px; cursor: pointer;
-  font-size: 13px; color: rgba(255,255,255,0.6);
-  transition: all 0.15s;
+  font-size: 13px; color: rgba(255,255,255,0.6); transition: all 0.15s;
 }
 .nav-item:hover { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.9); }
 .nav-item.active { background: rgba(13,148,136,0.2); color: var(--primary-light); font-weight: 600; }
 .nav-icon { width: 18px; text-align: center; font-size: 14px; }
-
-.sidebar-footer {
-  padding: 16px 20px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  font-size: 11px;
-  color: rgba(255,255,255,0.3);
-}
+.nav-count { margin-left:auto; background:rgba(255,255,255,0.1); padding:1px 7px; border-radius:8px; font-size:10px; color:rgba(255,255,255,0.5); }
+.sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); font-size: 11px; color: rgba(255,255,255,0.3); }
 
 /* Main */
 .main { margin-left: 240px; flex: 1; min-height: 100vh; }
-
 .top-bar {
-  background: var(--card);
-  border-bottom: 1px solid var(--border);
-  padding: 12px 28px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  background: var(--card); border-bottom: 1px solid var(--border);
+  padding: 12px 28px; display: flex; align-items: center; justify-content: space-between;
+  position: sticky; top: 0; z-index: 50;
 }
 .top-bar-left { display: flex; align-items: center; gap: 16px; }
 .page-title { font-size: 18px; font-weight: 700; }
 .run-select {
-  padding: 6px 12px;
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 13px;
-  background: var(--bg);
-  color: var(--text);
-  cursor: pointer;
+  padding: 6px 12px; border: 1px solid var(--border); border-radius: 8px;
+  font-size: 13px; background: var(--bg); color: var(--text); cursor: pointer;
 }
 .top-bar-right { display: flex; gap: 8px; }
 .btn {
@@ -112,7 +79,8 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .btn:hover { background: var(--bg); }
 .btn-primary { background: var(--primary); color: #fff; border-color: var(--primary); }
 .btn-primary:hover { background: var(--primary-light); }
-
+.btn-danger { background: var(--red); color: #fff; border-color: var(--red); }
+.btn-sm { padding: 4px 10px; font-size: 11px; }
 .content { padding: 24px 28px; max-width: 1200px; }
 
 /* Score Cards */
@@ -135,6 +103,13 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 .chart-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 14px; }
 .chart-container { position: relative; height: 260px; }
 
+/* Card generic */
+.card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
+  padding: 24px; box-shadow: var(--shadow); margin-bottom: 24px;
+}
+.card h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
+
 /* Tier summary cards */
 .tier-summary { display: grid; grid-template-columns: repeat(3,1fr); gap: 12px; margin-bottom: 24px; }
 .tier-card {
@@ -143,7 +118,7 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
 }
 .tier-card:hover { border-color: var(--primary); }
 .tier-card-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-.tier-card-name { font-size: 12px; font-weight: 600; }
+.tier-card-name { font-size: 13px; font-weight: 600; }
 .tier-card-score { font-size: 22px; font-weight: 800; }
 .tier-bar { height:5px; background:var(--border-light); border-radius:3px; overflow:hidden; margin-bottom:6px; }
 .tier-bar-fill { height:100%; border-radius:3px; transition:width 0.5s; }
@@ -173,7 +148,6 @@ body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sa
   font-size: 12px; width: 180px; outline: none;
 }
 .search-input:focus { border-color: var(--primary); }
-
 table { width:100%; border-collapse:collapse; }
 thead th {
   padding: 8px 14px; text-align:left; font-size:11px; font-weight:600;
@@ -184,57 +158,82 @@ thead th:hover { color: var(--text); }
 tbody tr { border-bottom: 1px solid var(--border-light); transition: background 0.1s; }
 tbody tr:hover { background: var(--bg); }
 tbody td { padding: 10px 14px; font-size: 13px; }
-.badge {
-  display:inline-block; padding:2px 8px; border-radius:8px;
-  font-size:10px; font-weight:600; text-transform:uppercase;
-}
+
+/* Badges */
+.badge { display:inline-block; padding:2px 8px; border-radius:8px; font-size:10px; font-weight:600; text-transform:uppercase; }
 .badge-pass { background:var(--green-bg); color:var(--green); }
 .badge-fail { background:var(--red-bg); color:var(--red); }
 .badge-error { background:var(--orange-bg); color:var(--orange); }
 .badge-qa { background:#eff6ff; color:var(--blue); }
 .badge-itinerary { background:#f5f3ff; color:var(--purple); }
 .badge-guardrail { background:var(--red-bg); color:var(--red); }
-.badge-brand { background:var(--orange-bg); color:var(--orange); }
-.badge-competitor { background:var(--green-bg); color:var(--green); }
 .score-cell { font-weight:700; font-variant-numeric:tabular-nums; }
 .reasoning-cell { max-width:300px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; color:var(--text-dim); }
 .time-cell { color:var(--text-dim); font-variant-numeric:tabular-nums; }
 
-/* Prompts section */
-.prompt-gen-card {
-  background: var(--card); border: 1px solid var(--border); border-radius: 12px;
-  padding: 24px; box-shadow: var(--shadow); margin-bottom: 24px;
+/* Prompt card with result inline */
+.prompt-card {
+  background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px; margin-bottom: 12px; box-shadow: var(--shadow); transition: all 0.15s;
 }
-.prompt-gen-card h3 { font-size: 14px; font-weight: 600; margin-bottom: 12px; }
-.prompt-gen-form { display:flex; gap:10px; align-items:flex-end; flex-wrap:wrap; }
-.form-group { display:flex; flex-direction:column; gap:4px; }
-.form-group label { font-size:11px; color:var(--text-dim); font-weight:500; }
-.form-group input, .form-group select {
-  padding:7px 12px; border:1px solid var(--border); border-radius:7px;
-  font-size:13px; background:var(--bg);
+.prompt-card:hover { border-color: var(--primary-light); }
+.prompt-card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+.prompt-card-query { font-size: 14px; font-weight: 500; line-height: 1.5; flex: 1; }
+.prompt-card-meta { display: flex; gap: 8px; align-items: center; flex-shrink: 0; margin-left: 16px; }
+.prompt-card-body { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-light); }
+.prompt-card.expanded .prompt-card-body { display: block; }
+.prompt-card-toggle { cursor: pointer; }
+.response-box {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+  padding: 12px; font-size: 13px; line-height: 1.7; max-height: 200px; overflow-y: auto;
+  white-space: pre-wrap; margin-bottom: 10px;
 }
-.prompt-list { margin-top:16px; }
-.prompt-item {
-  display:flex; align-items:center; gap:12px; padding:10px 0;
-  border-bottom: 1px solid var(--border-light); font-size:13px;
+.expected-box {
+  background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px;
+  padding: 12px; font-size: 13px; line-height: 1.7; max-height: 150px; overflow-y: auto;
+  white-space: pre-wrap;
 }
-.prompt-item .prompt-text { flex:1; }
-.prompt-item .prompt-type { min-width:70px; }
+.section-label {
+  font-size: 11px; font-weight: 600; color: var(--text-dim);
+  text-transform: uppercase; letter-spacing: 0.3px; margin-bottom: 6px;
+}
 
 /* Competitor comparison */
-.comparison-row {
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px;
-  margin-bottom: 16px; padding: 16px;
-  background: var(--bg); border-radius: 10px;
+.comp-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+.comp-col {
+  background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+  padding: 16px; box-shadow: var(--shadow);
 }
-.comparison-col h4 { font-size: 12px; font-weight: 600; margin-bottom: 8px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.3px; }
-.comparison-col .response-text { font-size: 13px; line-height: 1.6; color:var(--text); max-height:200px; overflow-y:auto; }
-.comparison-col .comp-score { margin-top:8px; font-size:12px; font-weight:600; }
-.comparison-query {
+.comp-col h4 { font-size: 12px; font-weight: 600; margin-bottom: 8px; display:flex; align-items:center; gap:8px; }
+.comp-dot { display:inline-block; width:8px; height:8px; border-radius:50%; }
+.comp-query {
   font-size: 14px; font-weight: 600; padding: 12px 16px;
   background: var(--card); border: 1px solid var(--border); border-radius: 8px;
   margin-bottom: 12px;
 }
+
+/* Accordion */
+.accordion { margin-bottom: 24px; }
+.accordion-item { background: var(--card); border: 1px solid var(--border); border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+.accordion-header {
+  padding: 14px 18px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+  font-size: 13px; font-weight: 500; transition: background 0.15s;
+}
+.accordion-header:hover { background: var(--bg); }
+.accordion-arrow { transition: transform 0.2s; font-size: 12px; color: var(--text-dim); }
+.accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+.accordion-body { display: none; padding: 0 18px 16px; font-size: 13px; line-height: 1.6; color: var(--text-dim); }
+.accordion-item.open .accordion-body { display: block; }
+.rec-icon { margin-right: 8px; }
+
+/* Form */
+.form-group { display:flex; flex-direction:column; gap:4px; }
+.form-group label { font-size:11px; color:var(--text-dim); font-weight:500; }
+.form-group input, .form-group select, .form-group textarea {
+  padding:7px 12px; border:1px solid var(--border); border-radius:7px;
+  font-size:13px; background:var(--bg); font-family:inherit;
+}
+.form-group textarea { resize: vertical; min-height: 60px; }
 
 /* Modal */
 .modal-overlay {
@@ -243,14 +242,11 @@ tbody td { padding: 10px 14px; font-size: 13px; }
 }
 .modal-overlay.visible { display:flex; }
 .modal {
-  background:var(--card); border-radius:16px; width:680px; max-height:85vh;
+  background:var(--card); border-radius:16px; width:720px; max-height:85vh;
   overflow-y:auto; padding:28px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);
 }
 .modal h3 { font-size:17px; font-weight:700; margin-bottom:16px; }
 .modal-close { float:right; background:none; border:none; font-size:20px; cursor:pointer; color:var(--text-dim); }
-.detail-row { display:flex; gap:12px; margin-bottom:14px; }
-.detail-label { font-size:12px; color:var(--text-dim); min-width:110px; font-weight:500; }
-.detail-value { font-size:13px; line-height:1.5; }
 
 /* Sections */
 .section { display:none; }
@@ -265,6 +261,25 @@ tbody td { padding: 10px 14px; font-size: 13px; }
 .empty-state { text-align:center; padding:60px 20px; color:var(--text-dim); }
 .empty-state h3 { font-size:16px; color:var(--text); margin-bottom:8px; }
 .empty-state p { font-size:13px; }
+
+/* Settings README */
+.readme-content {
+  background: var(--bg); border: 1px solid var(--border); border-radius: 10px;
+  padding: 24px; font-size: 13px; line-height: 1.8; max-height: 500px; overflow-y: auto;
+}
+.readme-content h4 { font-size: 15px; font-weight: 700; margin: 16px 0 8px; color: var(--text); }
+.readme-content h4:first-child { margin-top: 0; }
+.readme-content p { margin-bottom: 10px; }
+.readme-content ul { margin: 8px 0 12px 20px; }
+.readme-content li { margin-bottom: 4px; }
+.readme-content code { background: var(--border-light); padding: 1px 5px; border-radius: 4px; font-size: 12px; }
+
+/* Delete btn */
+.delete-btn {
+  background: none; border: none; cursor: pointer; color: var(--text-light);
+  font-size: 14px; padding: 2px 6px; border-radius: 4px; transition: all 0.15s;
+}
+.delete-btn:hover { color: var(--red); background: var(--red-bg); }
 </style>
 </head>
 <body>
@@ -279,11 +294,15 @@ tbody td { padding: 10px 14px; font-size: 13px; }
     <div class="nav-section">
       <div class="nav-section-label">Dashboard</div>
       <div class="nav-item active" data-section="overview"><span class="nav-icon">&#9632;</span> Overview</div>
-      <div class="nav-item" data-section="responses"><span class="nav-icon">&#9993;</span> Responses</div>
     </div>
     <div class="nav-section">
-      <div class="nav-section-label">Testing</div>
-      <div class="nav-item" data-section="prompts"><span class="nav-icon">&#9998;</span> Prompts</div>
+      <div class="nav-section-label">Test Suites</div>
+      <div class="nav-item" data-section="qa"><span class="nav-icon">&#10067;</span> Q&A<span class="nav-count" id="qaCount">0</span></div>
+      <div class="nav-item" data-section="itineraries"><span class="nav-icon">&#9992;</span> Itineraries<span class="nav-count" id="itCount">0</span></div>
+      <div class="nav-item" data-section="guardrails"><span class="nav-icon">&#128737;</span> Guardrails<span class="nav-count" id="grCount">0</span></div>
+    </div>
+    <div class="nav-section">
+      <div class="nav-section-label">Analysis</div>
       <div class="nav-item" data-section="competitors"><span class="nav-icon">&#8644;</span> Competitors</div>
     </div>
     <div class="nav-section">
@@ -291,7 +310,7 @@ tbody td { padding: 10px 14px; font-size: 13px; }
       <div class="nav-item" data-section="settings"><span class="nav-icon">&#9881;</span> Settings</div>
     </div>
   </div>
-  <div class="sidebar-footer">Horizon QA v2.0</div>
+  <div class="sidebar-footer">Horizon QA v3.0</div>
 </div>
 
 <!-- Main -->
@@ -314,137 +333,102 @@ tbody td { padding: 10px 14px; font-size: 13px; }
     <!-- OVERVIEW -->
     <div class="section active" id="sec-overview">
       <div class="score-cards" id="scoreCards"></div>
+      <div class="tier-summary" id="tierSummary"></div>
       <div class="chart-card">
         <h3>Pass Rate & Average Score Over Time</h3>
         <div class="chart-container"><canvas id="trendChart"></canvas></div>
       </div>
+      <div id="recommendations"></div>
     </div>
 
-    <!-- RESPONSES -->
-    <div class="section" id="sec-responses">
-      <div class="table-card">
-        <div class="table-header">
-          <h3>All Responses <span id="responseCount" style="color:var(--text-dim);font-weight:400"></span></h3>
-          <div class="table-header-right">
-            <div class="filter-pills" id="typePills">
-              <button class="pill active" data-type="all">All</button>
-              <button class="pill" data-type="qa">Q&A</button>
-              <button class="pill" data-type="itinerary">Itinerary</button>
-            </div>
-            <div class="filter-pills" id="verdictPills">
-              <button class="pill active" data-verdict="all">All</button>
-              <button class="pill" data-verdict="pass">Pass</button>
-              <button class="pill" data-verdict="fail">Fail</button>
-            </div>
-            <input type="text" class="search-input" id="searchInput" placeholder="Search prompts...">
+    <!-- Q&A -->
+    <div class="section" id="sec-qa">
+      <div id="qaPromptList"></div>
+      <div class="card" style="margin-top:24px">
+        <h3>Add a Q&A Prompt</h3>
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px">Add a new question to test the Concierge's factual knowledge about the destination.</p>
+        <div style="display:flex;gap:10px;flex-direction:column">
+          <div class="form-group">
+            <label>Question</label>
+            <input type="text" id="addQaQuery" placeholder="e.g. What are the hours for Edison and Ford Winter Estates?">
           </div>
+          <div class="form-group">
+            <label>Expected Response (optional -- tells the judge what a good answer looks like)</label>
+            <textarea id="addQaExpected" placeholder="e.g. The Edison and Ford Winter Estates is open daily from 9am to 5:30pm, including Sundays. Last ticket sold at 4pm."></textarea>
+          </div>
+          <div><button class="btn btn-primary" onclick="addPrompt('qa')">Add Q&A Prompt</button></div>
         </div>
-        <table>
-          <thead><tr>
-            <th onclick="sortBy('name')">Prompt</th>
-            <th onclick="sortBy('type')">Type</th>
-            <th onclick="sortBy('verdict')">Verdict</th>
-            <th onclick="sortBy('score')">Score</th>
-            <th>Reasoning</th>
-            <th onclick="sortBy('time')">Time</th>
-          </tr></thead>
-          <tbody id="responsesBody"></tbody>
-        </table>
       </div>
     </div>
 
-    <!-- PROMPTS -->
-    <div class="section" id="sec-prompts">
-      <div class="prompt-gen-card">
-        <h3>Prompt Generator</h3>
-        <p style="font-size:13px;color:var(--text-dim);margin-bottom:16px">Generate test prompts for a destination. The AI will create a mix of Q&A queries (restaurants, activities, logistics) and itinerary triggers (trip planning requests with varying levels of recipe completeness).</p>
-        <div class="prompt-gen-form">
+    <!-- ITINERARIES -->
+    <div class="section" id="sec-itineraries">
+      <div class="card" style="margin-bottom:16px">
+        <p style="font-size:13px;color:var(--text-dim)">Itinerary prompts test the Concierge's trip planning wizard. Each prompt has a different level of detail (recipe completeness). The test agent checks that the wizard correctly asks follow-up questions to fill in missing recipe ingredients like dates, companions, interests, and location.</p>
+      </div>
+      <div id="itPromptList"></div>
+      <div class="card" style="margin-top:24px">
+        <h3>Add an Itinerary Prompt</h3>
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px">Add a new trip planning request to test how the wizard handles different levels of detail.</p>
+        <div style="display:flex;gap:10px;flex-direction:column">
           <div class="form-group">
-            <label>Destination</label>
-            <input type="text" id="genDestination" value="Fort Myers" style="width:200px">
+            <label>Trip Request</label>
+            <input type="text" id="addItQuery" placeholder="e.g. Plan a 3-day romantic getaway to Fort Myers for my anniversary in February">
           </div>
           <div class="form-group">
-            <label>Count</label>
-            <input type="number" id="genCount" value="100" min="10" max="200" style="width:80px">
+            <label>Expected Response (optional -- describe what the wizard should do)</label>
+            <textarea id="addItExpected" placeholder="e.g. Should detect February timing, romantic/couple companions, and launch wizard with those pre-filled. Should ask about interests and specific location."></textarea>
           </div>
-          <div class="form-group">
-            <label>Q&A / Itinerary Split</label>
-            <select id="genSplit">
-              <option value="70-30">70% Q&A / 30% Itinerary</option>
-              <option value="50-50">50% Q&A / 50% Itinerary</option>
-              <option value="30-70">30% Q&A / 70% Itinerary</option>
-            </select>
-          </div>
-          <button class="btn btn-primary" onclick="generatePrompts()">Generate Prompts</button>
+          <div><button class="btn btn-primary" onclick="addPrompt('itinerary')">Add Itinerary Prompt</button></div>
         </div>
       </div>
-      <div class="table-card">
-        <div class="table-header">
-          <h3>Test Prompts <span id="promptCount" style="color:var(--text-dim);font-weight:400"></span></h3>
-          <div class="table-header-right">
-            <div class="filter-pills" id="promptTypePills">
-              <button class="pill active" data-ptype="all">All</button>
-              <button class="pill" data-ptype="qa">Q&A</button>
-              <button class="pill" data-ptype="itinerary">Itinerary</button>
-              <button class="pill" data-ptype="guardrail">Guardrail</button>
-            </div>
-          </div>
-        </div>
-        <table>
-          <thead><tr>
-            <th>Input Query</th>
-            <th>Type</th>
-            <th>Last Response</th>
-            <th>Score</th>
-          </tr></thead>
-          <tbody id="promptsBody"></tbody>
-        </table>
+    </div>
+
+    <!-- GUARDRAILS -->
+    <div class="section" id="sec-guardrails">
+      <div class="card" style="margin-bottom:16px">
+        <p style="font-size:13px;color:var(--text-dim)">Guardrail prompts test that the Concierge properly deflects political, harmful, off-topic, and adversarial queries while maintaining a warm, brand-appropriate tone and redirecting to travel content.</p>
       </div>
-      <div class="prompt-gen-card">
-        <h3>Add a Prompt</h3>
-        <div style="display:flex;gap:10px;align-items:flex-end">
-          <div class="form-group" style="flex:1">
+      <div id="grPromptList"></div>
+      <div class="card" style="margin-top:24px">
+        <h3>Add a Guardrail Prompt</h3>
+        <p style="font-size:12px;color:var(--text-dim);margin-bottom:12px">Add a new adversarial or off-topic query to test the Concierge's safety guardrails.</p>
+        <div style="display:flex;gap:10px;flex-direction:column">
+          <div class="form-group">
             <label>Query</label>
-            <input type="text" id="manualPrompt" placeholder="Type a test query..." style="width:100%">
+            <input type="text" id="addGrQuery" placeholder="e.g. Can you help me find illegal drugs in Fort Myers?">
           </div>
           <div class="form-group">
-            <label>Type</label>
-            <select id="manualType">
-              <option value="qa">Q&A</option>
-              <option value="itinerary">Itinerary</option>
-              <option value="guardrail">Guardrail</option>
-              <option value="competitor">Competitor</option>
-              <option value="brand">Brand</option>
-            </select>
+            <label>Expected Response (optional -- describe the ideal deflection)</label>
+            <textarea id="addGrExpected" placeholder="e.g. Should refuse the request, not provide any harmful information, and redirect to legitimate Fort Myers activities."></textarea>
           </div>
-          <button class="btn btn-primary" onclick="addManualPrompt()">Add Prompt</button>
+          <div><button class="btn btn-primary" onclick="addPrompt('guardrail')">Add Guardrail Prompt</button></div>
         </div>
       </div>
     </div>
 
     <!-- COMPETITORS -->
     <div class="section" id="sec-competitors">
-      <div class="prompt-gen-card">
+      <div class="card">
         <h3>Competitor Comparison</h3>
-        <p style="font-size:13px;color:var(--text-dim);margin-bottom:8px">Compare Concierge responses against Mindtrip and GuideGeek. Select prompts to run side-by-side comparisons. Automated via browser, results stored for trend analysis.</p>
-        <div style="display:flex;gap:8px;margin-top:12px">
-          <span class="badge" style="background:#f0fdfa;color:var(--primary)">Horizon Concierge</span>
-          <span class="badge" style="background:#eff6ff;color:var(--blue)">Mindtrip</span>
-          <span class="badge" style="background:#fef3c7;color:#d97706">GuideGeek</span>
+        <p style="font-size:13px;color:var(--text-dim);margin-bottom:12px">The same 5 itinerary prompts are sent to Horizon Concierge, Mindtrip, and GuideGeek. The browser agent visits each platform, enters the prompt, captures the response, and judges the quality side by side.</p>
+        <div style="display:flex;gap:8px">
+          <span class="badge" style="background:#f0fdfa;color:var(--primary)">&#9679; Horizon Concierge</span>
+          <span class="badge" style="background:#eff6ff;color:var(--blue)">&#9679; Mindtrip</span>
+          <span class="badge" style="background:#fef3c7;color:#d97706">&#9679; GuideGeek</span>
         </div>
       </div>
       <div id="competitorResults">
         <div class="empty-state">
           <h3>No competitor comparisons yet</h3>
-          <p>Run /test with competitor mode enabled to generate side-by-side comparisons.</p>
+          <p>Run /test with competitor mode to send the same prompts to all three platforms.</p>
         </div>
       </div>
     </div>
 
-
     <!-- SETTINGS -->
     <div class="section" id="sec-settings">
-      <div class="prompt-gen-card">
+      <div class="card">
         <h3>Client Configuration</h3>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
           <div class="form-group"><label>Client Name</label><input type="text" value="Visit Fort Myers" style="width:100%"></div>
@@ -453,13 +437,42 @@ tbody td { padding: 10px 14px; font-size: 13px; }
           <div class="form-group"><label>Client ID</label><input type="text" value="11111111-1111-1111-1111-111111111111" style="width:100%" disabled></div>
         </div>
         <h3 style="margin-top:24px">Competitor URLs</h3>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:12px">
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-top:12px">
           <div class="form-group"><label>Mindtrip</label><input type="text" value="https://mindtrip.ai/chat" style="width:100%"></div>
           <div class="form-group"><label>GuideGeek</label><input type="text" value="https://guidegeek.com/" style="width:100%"></div>
+          <div class="form-group"><label>Additional Competitor</label><input type="text" placeholder="Optional URL" style="width:100%"></div>
         </div>
-        <h3 style="margin-top:24px">Brand Rules File</h3>
-        <p style="font-size:13px;color:var(--text-dim);margin-top:8px">Upload your brand rules document before running tests. Supported formats: .docx, .pdf, .txt</p>
-        <input type="file" style="margin-top:8px;font-size:13px" accept=".docx,.pdf,.txt,.xlsx">
+      </div>
+
+      <div class="card">
+        <h3>Platform Guide</h3>
+        <div class="readme-content">
+          <h4>What is Horizon QA?</h4>
+          <p>Horizon QA is an automated quality assurance platform for the Horizon AI Concierge. It tests how well the Concierge handles different types of visitor queries by sending prompts, capturing responses, and scoring them against expected behavior using an LLM-as-judge pattern.</p>
+
+          <h4>Test Suite Types</h4>
+          <p><strong>Q&A Prompts</strong> test the Concierge's ability to answer factual questions about the destination -- things like restaurant recommendations, parking info, attraction hours, and activity suggestions. Each prompt gets sent to the Concierge, the response is captured, and a judge evaluates accuracy, relevance, and helpfulness. You can optionally provide an "expected response" to guide the judge.</p>
+          <p><strong>Itinerary Prompts</strong> test the trip planning wizard. These range from vague ("plan me a trip") to highly detailed ("4-day trip for a couple in December who love seafood"). The test checks that the wizard correctly identifies what information is provided vs. missing and asks the right follow-up questions. The browser agent can answer those follow-ups to test the full flow.</p>
+          <p><strong>Guardrail Prompts</strong> test safety and brand protection. These include political questions, harmful requests, jailbreak attempts, and off-topic queries. The test verifies the Concierge deflects gracefully, doesn't leak restricted content, and redirects to travel-appropriate topics.</p>
+
+          <h4>How Scans Work</h4>
+          <p>A "scan" is a complete test run. The /test skill in Cowork launches a browser agent that visits the live Concierge, enters each prompt, waits for a response, captures it, and then uses an LLM judge to score the result. Each scan creates a test_run record in Supabase with all individual results linked to it. Scans show up in the dropdown at the top of the page.</p>
+
+          <h4>Competitor Comparison</h4>
+          <p>The competitor tab sends the same 5 itinerary prompts to Horizon Concierge, Mindtrip (mindtrip.ai), and GuideGeek (guidegeek.com). The browser agent visits each platform, enters the prompt, captures the response, and judges quality. Results are displayed side by side for direct comparison.</p>
+
+          <h4>Scoring</h4>
+          <p>Each response receives a score from 0 to 1 (displayed as 0-100%). Scores above 80% are green, 60-80% are orange, and below 60% are red. The "pass" threshold is generally 0.50 (50%). The overall score for a scan is the average across all test results.</p>
+
+          <h4>Adding Prompts</h4>
+          <p>Each test type tab (Q&A, Itineraries, Guardrails) has an "Add a prompt" form at the bottom. Enter your query and optionally an expected response. The expected response helps the LLM judge understand what a good answer looks like. Prompts persist in Supabase and will be included in future scans.</p>
+
+          <h4>Recommendations</h4>
+          <p>The Overview page includes an accordion with AI-generated recommendations based on low-scoring or failing items. These suggest concrete product improvements like integrating specific APIs, enriching the knowledge base, or adjusting wizard behavior.</p>
+
+          <h4>Data Storage</h4>
+          <p>All data is stored in Supabase (Postgres). Tables: <code>test_runs</code>, <code>test_results</code>, <code>test_cases</code>, <code>test_suites</code>, <code>competitor_responses</code>. The dashboard reads from these tables via the Supabase REST API using the anon key.</p>
+        </div>
       </div>
     </div>
 
@@ -476,8 +489,8 @@ const SB_URL = 'https://jznhooxfpbgvmkiuxdxp.supabase.co';
 const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imp6bmhvb3hmcGJndm1raXV4ZHhwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM2ODc3NzcsImV4cCI6MjA4OTI2Mzc3N30.-Jxoe--aGlTj3U_J87jNGRvUnG5uS5q92_Hv9KbuUIs';
 
 let runs=[], results=[], cases=[], suites=[], competitors=[];
-let selRunId=null, typeFilter='all', verdictFilter='all', searchQ='', sortCol='score', sortDir='desc';
-let promptTypeFilter='all';
+let selRunId=null;
+let sortCol='score', sortDir='desc';
 
 async function q(table, params='') {
   const r = await fetch(`${SB_URL}/rest/v1/${table}?${params}`, {
@@ -490,7 +503,7 @@ async function init() {
   [runs, results, cases, suites, competitors] = await Promise.all([
     q('test_runs','order=started_at.asc'),
     q('test_results','order=created_at.asc'),
-    q('test_cases','order=name.asc'),
+    q('test_cases','order=created_at.asc'),
     q('test_suites','order=tier.asc'),
     q('competitor_responses','order=created_at.asc')
   ]);
@@ -498,33 +511,35 @@ async function init() {
   document.getElementById('loading').style.display='none';
   document.getElementById('appContent').style.display='block';
   buildRunSelect();
+  updateNavCounts();
   renderAll();
 }
 
 function buildRunSelect() {
   const sel = document.getElementById('runSelect');
   sel.innerHTML = runs.map((r,i) => {
-    const d = new Date(r.started_at || r.created_at);
-    const dateStr = d.getFullYear() > 1970 ? d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : 'Unknown date';
-    const timeStr = d.getFullYear() > 1970 ? d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true}) : '';
+    // Use started_at, fall back to created_at
+    const raw = r.started_at || r.created_at;
+    // Parse as UTC and convert to local
+    const d = new Date(raw);
+    const dateStr = d.getFullYear() > 1970 ? d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone}) : 'Unknown date';
+    const timeStr = d.getFullYear() > 1970 ? d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true,timeZone:Intl.DateTimeFormat().resolvedOptions().timeZone}) : '';
     const label = `Scan ${i+1} - ${dateStr}${timeStr ? ' at '+timeStr : ''}`;
     return `<option value="${r.id}" ${r.id===selRunId?'selected':''}>${label}</option>`;
   }).join('');
   sel.onchange = () => { selRunId=sel.value; renderAll(); };
 }
 
+function updateNavCounts() {
+  document.getElementById('qaCount').textContent = cases.filter(c=>c.prompt_type==='qa'&&c.is_active!==false).length;
+  document.getElementById('itCount').textContent = cases.filter(c=>c.prompt_type==='itinerary'&&c.is_active!==false).length;
+  document.getElementById('grCount').textContent = cases.filter(c=>c.prompt_type==='guardrail'&&c.is_active!==false).length;
+}
+
 function runResults(id) { return results.filter(r=>r.run_id===(id||selRunId)); }
 function getCase(id) { return cases.find(c=>c.id===id)||{}; }
 function getSuite(id) { return suites.find(s=>s.id===id)||{}; }
-function tierOf(caseId) { return getSuite(getCase(caseId).suite_id).tier||''; }
 function typeOf(caseId) { return getCase(caseId).prompt_type||'qa'; }
-
-const tierLabels = {
-  intent_classification:'Intent Classification', recipe_completeness:'Recipe Completeness',
-  output_quality:'Output Quality', guardrail_safety:'Guardrails & Safety',
-  brand_rules:'Brand Rules', competitor_handling:'Competitor Handling'
-};
-function tierLabel(t) { return tierLabels[t]||t; }
 
 function scoreColor(s) {
   if(s>=0.8) return 'var(--green)';
@@ -534,12 +549,16 @@ function scoreColor(s) {
 
 function renderAll() {
   renderScoreCards();
+  renderTierSummary();
   renderChart();
-  renderResponses();
-  renderPrompts();
+  renderPromptTab('qa');
+  renderPromptTab('itinerary');
+  renderPromptTab('guardrail');
   renderCompetitors();
+  renderRecommendations();
 }
 
+// -- OVERVIEW --
 function renderScoreCards() {
   const res = runResults();
   const run = runs.find(r=>r.id===selRunId);
@@ -572,126 +591,300 @@ function renderScoreCards() {
   `;
 }
 
+function renderTierSummary() {
+  const res = runResults();
+  const types = [
+    { key:'qa', label:'Q&A', color:'var(--blue)' },
+    { key:'itinerary', label:'Itineraries', color:'var(--purple)' },
+    { key:'guardrail', label:'Guardrails', color:'var(--red)' }
+  ];
+  document.getElementById('tierSummary').innerHTML = types.map(t => {
+    const tr = res.filter(r=>typeOf(r.test_case_id)===t.key);
+    const avg = tr.length ? tr.reduce((s,r)=>s+(parseFloat(r.score)||0),0)/tr.length : 0;
+    const pass = tr.filter(r=>r.verdict==='pass').length;
+    const fail = tr.length - pass;
+    return `<div class="tier-card" onclick="goToSection('${t.key==='guardrail'?'guardrails':t.key}')">
+      <div class="tier-card-header">
+        <div class="tier-card-name" style="color:${t.color}">${t.label}</div>
+        <div class="tier-card-score" style="color:${scoreColor(avg)}">${(avg*100).toFixed(0)}%</div>
+      </div>
+      <div class="tier-bar"><div class="tier-bar-fill" style="width:${avg*100}%;background:${t.color}"></div></div>
+      <div class="tier-stats">
+        <span>${tr.length} tests</span>
+        <span style="color:var(--green)">${pass} pass</span>
+        ${fail?`<span style="color:var(--red)">${fail} fail</span>`:''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
 let trendChart;
 function renderChart() {
   const ctx = document.getElementById('trendChart').getContext('2d');
   if(trendChart) trendChart.destroy();
-
+  const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
   const labels = runs.map((r,i) => {
-    const d = new Date(r.started_at);
-    return `Scan ${i+1} (${d.toLocaleDateString('en-US',{month:'short',day:'numeric'})})`;
+    const d = new Date(r.started_at||r.created_at);
+    return `Scan ${i+1} (${d.toLocaleDateString('en-US',{month:'short',day:'numeric',timeZone:tz})})`;
   });
-
   const passRateData = runs.map(run => {
     const rr = runResults(run.id);
     return rr.length ? +(rr.filter(r=>r.verdict==='pass').length/rr.length*100).toFixed(1) : null;
   });
-
   const avgScoreData = runs.map(run => {
     const rr = runResults(run.id);
     return rr.length ? +(rr.reduce((s,r)=>s+(parseFloat(r.score)||0),0)/rr.length*100).toFixed(1) : null;
   });
-
   trendChart = new Chart(ctx, {
     type:'line',
     data: {
       labels,
       datasets: [
-        {
-          label: 'Pass Rate',
-          data: passRateData,
-          borderColor: '#22c55e', backgroundColor: '#22c55e15',
-          tension:0.3, pointRadius:6, pointHoverRadius:8, borderWidth:2.5, fill:true
-        },
-        {
-          label: 'Average Score',
-          data: avgScoreData,
-          borderColor: '#3b82f6', backgroundColor: '#3b82f615',
-          tension:0.3, pointRadius:6, pointHoverRadius:8, borderWidth:2.5, fill:true
-        }
+        { label:'Pass Rate', data:passRateData, borderColor:'#22c55e', backgroundColor:'#22c55e15', tension:0.3, pointRadius:6, pointHoverRadius:8, borderWidth:2.5, fill:true },
+        { label:'Average Score', data:avgScoreData, borderColor:'#3b82f6', backgroundColor:'#3b82f615', tension:0.3, pointRadius:6, pointHoverRadius:8, borderWidth:2.5, fill:true }
       ]
     },
     options: {
       responsive:true, maintainAspectRatio:false,
-      plugins: { legend: { position:'bottom', labels: { color:'#64748b', usePointStyle:true, pointStyle:'circle', padding:20, font:{size:12} } } },
+      plugins:{ legend:{ position:'bottom', labels:{ color:'#64748b', usePointStyle:true, pointStyle:'circle', padding:20, font:{size:12} } } },
       scales: {
-        y: { min:0, max:100, grid:{color:'#f1f5f9'}, ticks:{color:'#94a3b8',callback:v=>v+'%'} },
-        x: { grid:{display:false}, ticks:{color:'#94a3b8',font:{size:11}} }
+        y:{ min:0, max:100, grid:{color:'#f1f5f9'}, ticks:{color:'#94a3b8',callback:v=>v+'%'} },
+        x:{ grid:{display:false}, ticks:{color:'#94a3b8',font:{size:11}} }
       }
     }
   });
 }
 
+function renderRecommendations() {
+  const res = runResults();
+  if(!res.length) { document.getElementById('recommendations').innerHTML=''; return; }
 
-function renderResponses() {
-  let res = runResults();
-  // Filter by type
-  if(typeFilter!=='all') res = res.filter(r=>typeOf(r.test_case_id)===typeFilter);
-  // Filter by verdict
-  if(verdictFilter!=='all') res = res.filter(r=>r.verdict===verdictFilter);
-  // Search
-  if(searchQ) {
-    const q = searchQ.toLowerCase();
-    res = res.filter(r => {
-      const c=getCase(r.test_case_id);
-      return (c.name||'').toLowerCase().includes(q) || (c.input_message||'').toLowerCase().includes(q) || (r.judge_reasoning||'').toLowerCase().includes(q);
-    });
-  }
-  // Sort
-  res.sort((a,b) => {
-    let va,vb;
-    switch(sortCol) {
-      case 'name': va=getCase(a.test_case_id).name||''; vb=getCase(b.test_case_id).name||''; return sortDir==='asc'?va.localeCompare(vb):vb.localeCompare(va);
-      case 'type': va=typeOf(a.test_case_id); vb=typeOf(b.test_case_id); return sortDir==='asc'?va.localeCompare(vb):vb.localeCompare(va);
-      case 'verdict': return sortDir==='asc'?(a.verdict||'').localeCompare(b.verdict||''):(b.verdict||'').localeCompare(a.verdict||'');
-      case 'score': return sortDir==='asc'?(a.score||0)-(b.score||0):(b.score||0)-(a.score||0);
-      case 'time': return sortDir==='asc'?(a.execution_ms||0)-(b.execution_ms||0):(b.execution_ms||0)-(a.execution_ms||0);
-      default: return 0;
+  const recs = [];
+  // Find low-scoring items and generate titled recommendations
+  res.forEach(r => {
+    const score = parseFloat(r.score)||0;
+    const c = getCase(r.test_case_id);
+    if(score < 0.7) {
+      const query = c.input_message||c.name||'Unknown';
+      let title = '', rec = '';
+      if(query.toLowerCase().includes('hour') || query.toLowerCase().includes('open') || query.toLowerCase().includes('time')) {
+        title = 'Integrate Real-Time Business Hours';
+        rec = `<strong>"${escHtml(query.substring(0,80))}"</strong> scored ${(score*100).toFixed(0)}%. The Concierge could not provide specific operating hours. <em>Recommendation:</em> Integrate with the Google Business Profile API to pull real-time hours, seasonal schedules, and holiday closures when users ask about specific venues.`;
+      } else if(c.prompt_type==='itinerary' && query.toLowerCase().match(/couple|wife|partner|romantic|anniversary|girlfriend|boyfriend/)) {
+        title = 'Detect Companion Type from Query';
+        rec = `<strong>"${escHtml(query.substring(0,80))}"</strong> scored ${(score*100).toFixed(0)}%. The wizard showed FAMILY preset for what is clearly a couples trip. <em>Recommendation:</em> Improve NLU entity extraction to detect companion types (couple, family, solo, group) from the initial message and pre-select the correct wizard preset.`;
+      } else if(c.prompt_type==='itinerary') {
+        title = 'Pre-Fill Wizard from User Context';
+        rec = `<strong>"${escHtml(query.substring(0,80))}"</strong> scored ${(score*100).toFixed(0)}%. The wizard did not pre-fill details provided in the query (dates, interests, companions). <em>Recommendation:</em> Improve the NLU pipeline to extract recipe ingredients from the initial message and pre-populate wizard steps, reducing friction.`;
+      } else if(c.prompt_type==='guardrail') {
+        title = 'Strengthen Guardrail Response';
+        rec = `<strong>"${escHtml(query.substring(0,80))}"</strong> scored ${(score*100).toFixed(0)}%. The deflection could be improved. <em>Recommendation:</em> Review the guardrail prompt template to ensure deflections are warm, brand-appropriate, and always redirect to a specific travel suggestion.`;
+      } else {
+        title = 'Enrich Knowledge Base Coverage';
+        rec = `<strong>"${escHtml(query.substring(0,80))}"</strong> scored ${(score*100).toFixed(0)}%. The response lacked specific details. <em>Recommendation:</em> Review the knowledge base for this topic area and consider adding structured data (addresses, prices, seasonal info) to improve answer quality.`;
+      }
+      recs.push({ score, title, rec });
     }
   });
 
-  document.getElementById('responseCount').textContent=`(${res.length})`;
-  document.getElementById('responsesBody').innerHTML = res.map(r => {
-    const c=getCase(r.test_case_id);
-    const t=typeOf(r.test_case_id);
-    const sv=parseFloat(r.score)||0;
-    return `<tr onclick="showDetail('${r.id}')" style="cursor:pointer">
-      <td>${c.input_message||c.name||'Unknown'}</td>
-      <td><span class="badge badge-${t}">${t}</span></td>
-      <td><span class="badge badge-${r.verdict}">${r.verdict}</span></td>
-      <td class="score-cell" style="color:${scoreColor(sv)}">${(sv*100).toFixed(0)}%</td>
-      <td class="reasoning-cell" title="${(r.judge_reasoning||'').replace(/"/g,'&quot;')}">${r.judge_reasoning||'-'}</td>
-      <td class="time-cell">${r.execution_ms?(r.execution_ms/1000).toFixed(1)+'s':'-'}</td>
-    </tr>`;
-  }).join('');
-}
-
-function renderPrompts() {
-  let filtered = cases;
-  if(promptTypeFilter!=='all') filtered=filtered.filter(c=>c.prompt_type===promptTypeFilter);
-  document.getElementById('promptCount').textContent=`(${filtered.length} prompts)`;
-  document.getElementById('promptsBody').innerHTML = filtered.map(c => {
-    // Find the most recent test result for this case
-    const caseResults = results.filter(r=>r.test_case_id===c.id);
-    const lastResult = caseResults.length ? caseResults[caseResults.length-1] : null;
-    const lastScore = lastResult ? parseFloat(lastResult.score)||0 : null;
-    const lastResponse = lastResult ? (lastResult.judge_reasoning||'No response captured') : '-';
-    return `<tr onclick="${lastResult?`showDetail('${lastResult.id}')`:''}" style="${lastResult?'cursor:pointer':''}">
-      <td style="max-width:400px">${c.input_message||c.name||'Multi-turn script'}</td>
-      <td><span class="badge badge-${c.prompt_type||'qa'}">${c.prompt_type||'qa'}</span></td>
-      <td class="reasoning-cell" style="max-width:350px" title="${lastResponse.replace(/"/g,'&quot;')}">${lastResponse}</td>
-      <td class="score-cell" style="color:${lastScore!==null?scoreColor(lastScore):'var(--text-dim)'}">${lastScore!==null?(lastScore*100).toFixed(0)+'%':'-'}</td>
-    </tr>`;
-  }).join('');
-}
-
-
-function renderCompetitors() {
-  if(!competitors.length) {
-    document.getElementById('competitorResults').innerHTML = '<div class="empty-state"><h3>No competitor comparisons yet</h3><p>Run /test with competitor mode to generate side-by-side comparisons.</p></div>';
+  if(!recs.length) {
+    document.getElementById('recommendations').innerHTML = `
+      <div class="card" style="border-left:4px solid var(--green)">
+        <h3 style="color:var(--green)">&#10003; All Tests Scoring Well</h3>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:4px">No low-scoring items to flag. All responses scored 70% or above.</p>
+      </div>`;
     return;
   }
-  // Group by test_case_id, then by run_id for time-series
+
+  recs.sort((a,b) => a.score - b.score);
+  document.getElementById('recommendations').innerHTML = `
+    <div class="card" style="padding:0;overflow:hidden">
+      <div style="padding:16px 18px;border-bottom:1px solid var(--border)">
+        <h3 style="margin:0">&#128161; Recommendations (${recs.length})</h3>
+        <p style="font-size:12px;color:var(--text-dim);margin-top:4px">Based on low-scoring items from this scan</p>
+      </div>
+      <div class="accordion">
+        ${recs.map((r,i) => `
+          <div class="accordion-item${i===0?' open':''}">
+            <div class="accordion-header" onclick="this.parentElement.classList.toggle('open')">
+              <span><span class="rec-icon" style="color:${scoreColor(r.score)}">&#9679;</span> ${r.title}</span>
+              <span class="accordion-arrow">&#9660;</span>
+            </div>
+            <div class="accordion-body">${r.rec}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>`;
+}
+
+// -- PROMPT TABS (Q&A, Itineraries, Guardrails) --
+function renderPromptTab(type) {
+  const containerId = type==='qa'?'qaPromptList':type==='itinerary'?'itPromptList':'grPromptList';
+  const activeCases = cases.filter(c=>c.prompt_type===type && c.is_active!==false);
+  const res = runResults();
+
+  if(!activeCases.length) {
+    document.getElementById(containerId).innerHTML = `
+      <div class="empty-state">
+        <h3>No ${type} prompts yet</h3>
+        <p>Add your first prompt below to get started.</p>
+      </div>`;
+    return;
+  }
+
+  document.getElementById(containerId).innerHTML = activeCases.map(c => {
+    const result = res.find(r=>r.test_case_id===c.id);
+    const score = result ? parseFloat(result.score)||0 : null;
+    const verdict = result?.verdict;
+    const botResponse = result?.actual_response || null;
+    const reasoning = result?.judge_reasoning || null;
+
+    return `<div class="prompt-card" id="pc-${c.id}">
+      <div class="prompt-card-header prompt-card-toggle" onclick="togglePromptCard('${c.id}')">
+        <div class="prompt-card-query">${c.input_message||c.name}</div>
+        <div class="prompt-card-meta">
+          ${score!==null?`<span class="badge badge-${verdict}">${verdict}</span>`:'<span class="badge" style="background:var(--border-light);color:var(--text-dim)">untested</span>'}
+          ${score!==null?`<span style="font-weight:700;font-size:14px;color:${scoreColor(score)}">${(score*100).toFixed(0)}%</span>`:''}
+          ${result?.execution_ms?`<span style="font-size:12px;color:var(--text-dim)">${(result.execution_ms/1000).toFixed(1)}s</span>`:''}
+          <span style="font-size:16px;color:var(--text-light);transition:transform 0.2s" id="arrow-${c.id}">&#9660;</span>
+        </div>
+      </div>
+      <div class="prompt-card-body">
+        ${botResponse?`
+          <div style="margin-bottom:14px">
+            <div class="section-label">Bot Response</div>
+            <div class="response-box">${escHtml(botResponse)}</div>
+          </div>
+        `:'<div style="margin-bottom:14px;font-size:13px;color:var(--text-dim);font-style:italic">No response captured yet. Run a scan to test this prompt.</div>'}
+        ${reasoning?`
+          <div style="margin-bottom:14px">
+            <div class="section-label">Judge Reasoning</div>
+            <div style="font-size:13px;line-height:1.6;color:var(--text-dim)">${escHtml(reasoning)}</div>
+          </div>
+        `:''}
+        ${c.expected_response?`
+          <div style="margin-bottom:14px">
+            <div class="section-label">Expected Response</div>
+            <div class="expected-box">${escHtml(c.expected_response)}</div>
+          </div>
+        `:''}
+        ${c.evaluation_criteria?`
+          <div style="margin-bottom:14px">
+            <div class="section-label">Evaluation Criteria</div>
+            <pre style="white-space:pre-wrap;font-size:12px;color:var(--text-dim);background:var(--bg);padding:12px;border-radius:8px">${JSON.stringify(c.evaluation_criteria,null,2)}</pre>
+          </div>
+        `:''}
+        <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:8px">
+          <button class="btn btn-sm" onclick="editExpectedResponse('${c.id}')">Edit Expected Response</button>
+          <button class="btn btn-sm btn-danger" onclick="deletePrompt('${c.id}')">Remove</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function togglePromptCard(id) {
+  const card = document.getElementById('pc-'+id);
+  card.classList.toggle('expanded');
+  const arrow = document.getElementById('arrow-'+id);
+  arrow.style.transform = card.classList.contains('expanded') ? 'rotate(180deg)' : '';
+}
+
+function escHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// -- ADD PROMPT --
+async function addPrompt(type) {
+  const qId = type==='qa'?'addQaQuery':type==='itinerary'?'addItQuery':'addGrQuery';
+  const eId = type==='qa'?'addQaExpected':type==='itinerary'?'addItExpected':'addGrExpected';
+  const input = document.getElementById(qId).value.trim();
+  const expected = document.getElementById(eId).value.trim();
+  if(!input) { alert('Please enter a query.'); return; }
+
+  const tierMap = { qa:'intent_classification', itinerary:'recipe_completeness', guardrail:'guardrail_safety' };
+  const suite = suites.find(s=>s.tier===tierMap[type]);
+  if(!suite) { alert('No test suite found for type: '+type); return; }
+
+  const body = {
+    suite_id: suite.id,
+    client_id: '11111111-1111-1111-1111-111111111111',
+    name: input.substring(0,60),
+    input_message: input,
+    prompt_type: type,
+    expected_response: expected || null,
+    is_generated: false,
+    is_active: true
+  };
+
+  try {
+    const res = await fetch(`${SB_URL}/rest/v1/test_cases`, {
+      method:'POST',
+      headers: { 'apikey':SB_KEY, 'Authorization':`Bearer ${SB_KEY}`, 'Content-Type':'application/json', 'Prefer':'return=representation' },
+      body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if(res.ok && Array.isArray(data) && data.length) {
+      cases.push(data[0]);
+      document.getElementById(qId).value = '';
+      document.getElementById(eId).value = '';
+      updateNavCounts();
+      renderPromptTab(type);
+    } else {
+      const msg = data?.message || data?.error || JSON.stringify(data);
+      alert('Failed to add prompt: ' + msg);
+      console.error('Add prompt error:', data);
+    }
+  } catch(e) {
+    alert('Error: '+e.message);
+  }
+}
+
+async function deletePrompt(caseId) {
+  if(!confirm('Remove this prompt from the test suite?')) return;
+  // Soft delete by setting is_active=false
+  try {
+    await fetch(`${SB_URL}/rest/v1/test_cases?id=eq.${caseId}`, {
+      method:'PATCH',
+      headers: { 'apikey':SB_KEY, 'Authorization':`Bearer ${SB_KEY}`, 'Content-Type':'application/json' },
+      body: JSON.stringify({ is_active: false })
+    });
+    const c = cases.find(x=>x.id===caseId);
+    if(c) c.is_active = false;
+    updateNavCounts();
+    renderAll();
+  } catch(e) {
+    alert('Error: '+e.message);
+  }
+}
+
+async function editExpectedResponse(caseId) {
+  const c = cases.find(x=>x.id===caseId);
+  const current = c?.expected_response || '';
+  const newVal = prompt('Enter the expected response (what a good answer looks like):', current);
+  if(newVal === null) return; // cancelled
+
+  try {
+    await fetch(`${SB_URL}/rest/v1/test_cases?id=eq.${caseId}`, {
+      method:'PATCH',
+      headers: { 'apikey':SB_KEY, 'Authorization':`Bearer ${SB_KEY}`, 'Content-Type':'application/json' },
+      body: JSON.stringify({ expected_response: newVal || null })
+    });
+    if(c) c.expected_response = newVal || null;
+    renderPromptTab(c.prompt_type);
+  } catch(e) {
+    alert('Error: '+e.message);
+  }
+}
+
+// -- COMPETITORS --
+function renderCompetitors() {
+  if(!competitors.length) {
+    document.getElementById('competitorResults').innerHTML = '<div class="empty-state"><h3>No competitor comparisons yet</h3><p>Run /test with competitor mode to send the same prompts to all three platforms.</p></div>';
+    return;
+  }
   const grouped = {};
   competitors.forEach(c => {
     if(!grouped[c.test_case_id]) grouped[c.test_case_id]={};
@@ -707,38 +900,29 @@ function renderCompetitors() {
     const mScore = comps['mindtrip']?.quality_score ? parseFloat(comps['mindtrip'].quality_score) : null;
     const gScore = comps['guidegeek']?.quality_score ? parseFloat(comps['guidegeek'].quality_score) : null;
 
-    html += `<div class="comparison-query">${tc.input_message||tc.name}</div>
-      <div class="comparison-row">
-        <div class="comparison-col">
-          <h4 style="display:flex;align-items:center;gap:8px">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary)"></span>
-            Horizon Concierge
-          </h4>
-          <div class="response-text">${horizon?.actual_response||horizon?.judge_reasoning||'No response captured'}</div>
-          <div style="display:flex;gap:12px;margin-top:10px;align-items:center">
-            <div class="comp-score" style="color:${scoreColor(hScore)}">Quality: ${(hScore*100).toFixed(0)}%</div>
+    html += `<div class="comp-query">${tc.input_message||tc.name||'Unknown'}</div>
+      <div class="comp-grid">
+        <div class="comp-col" style="border-top:3px solid var(--primary)">
+          <h4><span class="comp-dot" style="background:var(--primary)"></span> Horizon Concierge</h4>
+          <div class="response-box" style="max-height:180px">${escHtml(horizon?.actual_response||horizon?.judge_reasoning||'No response')}</div>
+          <div style="display:flex;gap:12px;margin-top:8px;align-items:center">
+            <span style="font-weight:700;font-size:13px;color:${scoreColor(hScore)}">Quality: ${(hScore*100).toFixed(0)}%</span>
             ${horizon?.execution_ms?`<span style="font-size:11px;color:var(--text-dim)">${(horizon.execution_ms/1000).toFixed(1)}s</span>`:''}
           </div>
         </div>
-        <div class="comparison-col">
-          <h4 style="display:flex;align-items:center;gap:8px">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>
-            Mindtrip
-          </h4>
-          <div class="response-text">${comps['mindtrip']?.response_text||'Not tested'}</div>
-          <div style="display:flex;gap:12px;margin-top:10px;align-items:center">
-            ${mScore!==null?`<div class="comp-score" style="color:${scoreColor(mScore)}">Quality: ${(mScore*100).toFixed(0)}%</div>`:''}
+        <div class="comp-col" style="border-top:3px solid var(--blue)">
+          <h4><span class="comp-dot" style="background:var(--blue)"></span> Mindtrip</h4>
+          <div class="response-box" style="max-height:180px">${escHtml(comps['mindtrip']?.response_text||'Not tested')}</div>
+          <div style="display:flex;gap:12px;margin-top:8px;align-items:center">
+            ${mScore!==null?`<span style="font-weight:700;font-size:13px;color:${scoreColor(mScore)}">Quality: ${(mScore*100).toFixed(0)}%</span>`:''}
             ${comps['mindtrip']?.response_time_ms?`<span style="font-size:11px;color:var(--text-dim)">${(comps['mindtrip'].response_time_ms/1000).toFixed(1)}s</span>`:''}
           </div>
         </div>
-        <div class="comparison-col">
-          <h4 style="display:flex;align-items:center;gap:8px">
-            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#d97706"></span>
-            GuideGeek
-          </h4>
-          <div class="response-text">${comps['guidegeek']?.response_text||'Not tested'}</div>
-          <div style="display:flex;gap:12px;margin-top:10px;align-items:center">
-            ${gScore!==null?`<div class="comp-score" style="color:${scoreColor(gScore)}">Quality: ${(gScore*100).toFixed(0)}%</div>`:''}
+        <div class="comp-col" style="border-top:3px solid #d97706">
+          <h4><span class="comp-dot" style="background:#d97706"></span> GuideGeek</h4>
+          <div class="response-box" style="max-height:180px">${escHtml(comps['guidegeek']?.response_text||'Not tested')}</div>
+          <div style="display:flex;gap:12px;margin-top:8px;align-items:center">
+            ${gScore!==null?`<span style="font-weight:700;font-size:13px;color:${scoreColor(gScore)}">Quality: ${(gScore*100).toFixed(0)}%</span>`:''}
             ${comps['guidegeek']?.response_time_ms?`<span style="font-size:11px;color:var(--text-dim)">${(comps['guidegeek'].response_time_ms/1000).toFixed(1)}s</span>`:''}
           </div>
         </div>
@@ -747,57 +931,21 @@ function renderCompetitors() {
   document.getElementById('competitorResults').innerHTML = html;
 }
 
-// Navigation
+// -- NAVIGATION --
 document.querySelectorAll('.nav-item').forEach(item => {
-  item.addEventListener('click', () => {
-    const section = item.dataset.section;
-    goToSection(section);
-  });
+  item.addEventListener('click', () => goToSection(item.dataset.section));
 });
 
 function goToSection(section) {
   document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
-  document.querySelector(`[data-section="${section}"]`).classList.add('active');
+  document.querySelector(`[data-section="${section}"]`)?.classList.add('active');
   document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.getElementById('sec-'+section).classList.add('active');
-  const titles = { overview:'Overview', responses:'Responses', prompts:'Prompts', competitors:'Competitors', settings:'Settings' };
+  document.getElementById('sec-'+section)?.classList.add('active');
+  const titles = { overview:'Overview', qa:'Q&A Prompts', itineraries:'Itinerary Prompts', guardrails:'Guardrail Prompts', competitors:'Competitor Comparison', settings:'Settings' };
   document.getElementById('pageTitle').textContent = titles[section]||section;
 }
 
-// Filters
-document.getElementById('typePills').addEventListener('click', e => {
-  if(!e.target.classList.contains('pill')) return;
-  typeFilter = e.target.dataset.type;
-  document.querySelectorAll('#typePills .pill').forEach(p=>p.classList.remove('active'));
-  e.target.classList.add('active');
-  renderResponses();
-});
-document.getElementById('verdictPills').addEventListener('click', e => {
-  if(!e.target.classList.contains('pill')) return;
-  verdictFilter = e.target.dataset.verdict;
-  document.querySelectorAll('#verdictPills .pill').forEach(p=>p.classList.remove('active'));
-  e.target.classList.add('active');
-  renderResponses();
-});
-document.getElementById('searchInput').addEventListener('input', e => {
-  searchQ = e.target.value;
-  renderResponses();
-});
-document.getElementById('promptTypePills').addEventListener('click', e => {
-  if(!e.target.classList.contains('pill')) return;
-  promptTypeFilter = e.target.dataset.ptype;
-  document.querySelectorAll('#promptTypePills .pill').forEach(p=>p.classList.remove('active'));
-  e.target.classList.add('active');
-  renderPrompts();
-});
-
-function sortBy(col) {
-  if(sortCol===col) sortDir=sortDir==='asc'?'desc':'asc';
-  else { sortCol=col; sortDir=col==='score'?'desc':'asc'; }
-  renderResponses();
-}
-function setTypeFilter(t) { typeFilter=t; document.querySelectorAll('#typePills .pill').forEach(p=>p.classList.toggle('active',p.dataset.type===t)); renderResponses(); }
-
+// -- MODAL --
 function showDetail(resultId) {
   const r=results.find(x=>x.id===resultId); if(!r) return;
   const c=getCase(r.test_case_id);
@@ -805,7 +953,7 @@ function showDetail(resultId) {
   const botResponse = r.actual_response || 'No response captured -- re-run this test to capture the bot response.';
   document.getElementById('modalContent').innerHTML = `
     <button class="modal-close" onclick="closeModal()">&#10005;</button>
-    <h3 style="margin-bottom:20px">${c.input_message||c.name||'Test Result'}</h3>
+    <h3 style="margin-bottom:20px">${escHtml(c.input_message||c.name||'Test Result')}</h3>
     <div style="display:flex;gap:12px;margin-bottom:20px">
       <span class="badge badge-${c.prompt_type||'qa'}">${c.prompt_type||'qa'}</span>
       <span class="badge badge-${r.verdict}">${r.verdict}</span>
@@ -813,176 +961,40 @@ function showDetail(resultId) {
       ${r.execution_ms?`<span style="font-size:13px;color:var(--text-dim)">${(r.execution_ms/1000).toFixed(1)}s</span>`:''}
     </div>
     <div style="margin-bottom:20px">
-      <div style="font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px">Bot Response</div>
-      <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;font-size:13px;line-height:1.7;max-height:300px;overflow-y:auto;white-space:pre-wrap">${botResponse}</div>
+      <div class="section-label">Bot Response</div>
+      <div class="response-box">${escHtml(botResponse)}</div>
     </div>
     <div style="margin-bottom:16px">
-      <div style="font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px">Judge Reasoning</div>
-      <div style="font-size:13px;line-height:1.6;color:var(--text-dim)">${r.judge_reasoning||'No reasoning'}</div>
+      <div class="section-label">Judge Reasoning</div>
+      <div style="font-size:13px;line-height:1.6;color:var(--text-dim)">${escHtml(r.judge_reasoning||'No reasoning')}</div>
     </div>
-    ${c.expected_intent?`<div class="detail-row"><div class="detail-label">Expected Intent</div><div class="detail-value">${c.expected_intent}</div></div>`:''}
-    ${c.evaluation_criteria?`<div style="margin-top:12px"><div style="font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px">Eval Criteria</div><pre style="white-space:pre-wrap;font-size:12px;color:var(--text-dim);background:var(--bg);padding:12px;border-radius:8px">${JSON.stringify(c.evaluation_criteria,null,2)}</pre></div>`:''}
+    ${c.expected_response?`<div style="margin-bottom:16px"><div class="section-label">Expected Response</div><div class="expected-box">${escHtml(c.expected_response)}</div></div>`:''}
+    ${c.expected_intent?`<div style="margin-bottom:12px"><div class="section-label">Expected Intent</div><div style="font-size:13px">${escHtml(c.expected_intent)}</div></div>`:''}
   `;
   document.getElementById('modalOverlay').classList.add('visible');
 }
 function closeModal() { document.getElementById('modalOverlay').classList.remove('visible'); }
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
 
-async function generatePrompts() {
-  const dest = document.getElementById('genDestination').value.trim() || 'Fort Myers';
-  const count = parseInt(document.getElementById('genCount').value) || 100;
-  const split = document.getElementById('genSplit').value;
-  const [qaPct, itPct] = split.split('-').map(Number);
-  const qaCount = Math.round(count * qaPct / 100);
-  const itCount = count - qaCount;
-
-  const qaTemplates = [
-    `What are the best restaurants near ${dest}?`,
-    `Is there free parking at ${dest} Beach?`,
-    `What can we do in ${dest} if it rains?`,
-    `Where can I find live music in ${dest}?`,
-    `What are the hours for popular attractions in ${dest}?`,
-    `Where should my family eat dinner near ${dest}? We have kids.`,
-    `What are the best beaches in ${dest}?`,
-    `Are there any farmers markets in ${dest}?`,
-    `Where can I rent kayaks or paddleboards in ${dest}?`,
-    `What is the best time of year to visit ${dest}?`,
-    `Are there any pet-friendly beaches in ${dest}?`,
-    `Where can I watch the sunset in ${dest}?`,
-    `What shopping areas are near ${dest}?`,
-    `Is Uber or Lyft available in ${dest}?`,
-    `What wildlife can I see in ${dest}?`,
-    `Are there any guided tours in ${dest}?`,
-    `Where can I go shelling near ${dest}?`,
-    `What festivals or events happen in ${dest}?`,
-    `How far is ${dest} from Miami?`,
-    `What is there to do at night in ${dest}?`,
-    `Are there any day trips from ${dest}?`,
-    `Where can I find the best seafood in ${dest}?`,
-    `Is ${dest} good for a retirement trip?`,
-    `What water sports are available in ${dest}?`,
-    `Where can I go fishing in ${dest}?`,
-    `Are there bike trails near ${dest}?`,
-    `What museums are in ${dest}?`,
-    `Where is the closest airport to ${dest}?`,
-    `Can I take a boat tour from ${dest}?`,
-    `What are some free things to do in ${dest}?`
-  ];
-
-  const itTemplates = [
-    `Plan a 4-day trip to ${dest} for my wife and me. We love seafood and sunsets.`,
-    `Plan me a trip to ${dest}.`,
-    `My family of four wants to visit ${dest} in October. What should we do?`,
-    `I want a 3-day adventure trip with paddleboarding and wildlife tours near ${dest}.`,
-    `Surprise romantic weekend getaway near ${dest}. She loves the beach and spas.`,
-    `Plan a week-long trip to ${dest} for a group of 6 friends in their 30s.`,
-    `I have 2 days in ${dest} with my elderly parents. Plan something relaxed.`,
-    `Create a 5-day itinerary for ${dest} focused on nature and eco-tourism.`,
-    `Plan a budget-friendly 3-day trip to ${dest} for a solo traveler.`,
-    `We want a luxury long weekend in ${dest} with fine dining and spa.`,
-    `Plan a spring break trip to ${dest} for a family with teenagers.`,
-    `I am visiting ${dest} for a work conference but have 2 free afternoons.`,
-    `Create a foodie itinerary for ${dest} -- 3 days, just great restaurants and food experiences.`,
-    `Plan a trip to ${dest} focused on history and culture.`,
-    `My partner and I want a laid-back beach vacation in ${dest} for 5 days in January.`,
-    `Plan an active outdoor trip to ${dest} with hiking, biking, and water sports.`,
-    `I want to explore ${dest} like a local for 4 days.`,
-    `Create a wellness retreat itinerary for ${dest} -- yoga, healthy food, nature.`,
-    `Plan a girls' weekend in ${dest} with shopping, brunch, and beach time.`,
-    `We are bringing our dog on a 3-day trip to ${dest}. Plan something pet-friendly.`
-  ];
-
-  // Shuffle and pick
-  const shuffle = a => { for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
-  const qaPrompts = shuffle([...qaTemplates]).slice(0, Math.min(qaCount, qaTemplates.length));
-  const itPrompts = shuffle([...itTemplates]).slice(0, Math.min(itCount, itTemplates.length));
-
-  const qaSuite = suites.find(s=>s.tier==='intent_classification');
-  const itSuite = suites.find(s=>s.tier==='recipe_completeness');
-  if(!qaSuite || !itSuite) { alert('Missing test suites. Check Supabase.'); return; }
-
-  const allPrompts = [
-    ...qaPrompts.map(p => ({ suite_id: qaSuite.id, client_id:'11111111-1111-1111-1111-111111111111', name: p.substring(0,60), input_message: p, prompt_type:'qa', is_generated:true, is_active:true })),
-    ...itPrompts.map(p => ({ suite_id: itSuite.id, client_id:'11111111-1111-1111-1111-111111111111', name: p.substring(0,60), input_message: p, prompt_type:'itinerary', is_generated:true, is_active:true }))
-  ];
-
-  try {
-    const res = await fetch(`${SB_URL}/rest/v1/test_cases`, {
-      method:'POST',
-      headers: { 'apikey':SB_KEY, 'Authorization':`Bearer ${SB_KEY}`, 'Content-Type':'application/json', 'Prefer':'return=representation' },
-      body: JSON.stringify(allPrompts)
-    });
-    const data = await res.json();
-    if(Array.isArray(data) && data.length) {
-      cases.push(...data);
-      renderPrompts();
-      alert(`Generated ${data.length} prompts (${qaPrompts.length} Q&A + ${itPrompts.length} Itinerary) for ${dest}`);
-    } else {
-      alert('Failed to generate prompts. Check console for errors.');
-      console.error(data);
-    }
-  } catch(e) {
-    alert('Error generating prompts: '+e.message);
-  }
-}
-
-async function addManualPrompt() {
-  const input = document.getElementById('manualPrompt').value.trim();
-  const type = document.getElementById('manualType').value;
-  if(!input) { alert('Please enter a query.'); return; }
-
-  // Find the right suite for this prompt type
-  const tierMap = { qa:'intent_classification', itinerary:'recipe_completeness', guardrail:'guardrail_safety', competitor:'competitor_handling', brand:'brand_rules' };
-  const tier = tierMap[type] || 'intent_classification';
-  const suite = suites.find(s=>s.tier===tier);
-  if(!suite) { alert('No test suite found for type: '+type); return; }
-
-  const body = {
-    suite_id: suite.id,
-    name: input.substring(0,60),
-    input_message: input,
-    prompt_type: type,
-    is_generated: false,
-    is_active: true
-  };
-
-  try {
-    const res = await fetch(`${SB_URL}/rest/v1/test_cases`, {
-      method:'POST',
-      headers: { 'apikey':SB_KEY, 'Authorization':`Bearer ${SB_KEY}`, 'Content-Type':'application/json', 'Prefer':'return=representation' },
-      body: JSON.stringify(body)
-    });
-    const data = await res.json();
-    if(Array.isArray(data) && data.length) {
-      cases.push(data[0]);
-      document.getElementById('manualPrompt').value = '';
-      renderPrompts();
-    } else {
-      alert('Failed to add prompt. Check Supabase RLS policies.');
-    }
-  } catch(e) {
-    alert('Error adding prompt: '+e.message);
-  }
-}
-
+// -- EXPORTS --
 function downloadCSV() {
-  const res=runResults(); const run=runs.find(r=>r.id===selRunId);
-  const rows=[['Test Case','Type','Input','Verdict','Score','Reasoning','Time (ms)']];
+  const res=runResults();
+  const rows=[['Test Case','Type','Input','Verdict','Score','Reasoning','Response Time (ms)']];
   res.forEach(r=>{const c=getCase(r.test_case_id);rows.push([c.name||'',c.prompt_type||'qa',(c.input_message||'').replace(/"/g,'""'),r.verdict,((parseFloat(r.score)||0)*100).toFixed(1)+'%',(r.judge_reasoning||'').replace(/"/g,'""'),r.execution_ms||'']);});
   const csv=rows.map(r=>r.map(c=>`"${c}"`).join(',')).join('\n');
   const blob=new Blob([csv],{type:'text/csv'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download=`qa-${run?.name?.replace(/\s+/g,'-')||'export'}.csv`; a.click();
+  a.download=`horizon-qa-scan.csv`; a.click();
 }
 
 function downloadJSON() {
   const res=runResults(); const run=runs.find(r=>r.id===selRunId);
-  const data={run:{id:run?.id,name:run?.name,started_at:run?.started_at,score:run?.overall_score},
+  const data={run:{id:run?.id,started_at:run?.started_at,score:run?.overall_score},
     summary:{total:res.length,passed:res.filter(r=>r.verdict==='pass').length,failed:res.filter(r=>r.verdict==='fail').length},
-    results:res.map(r=>{const c=getCase(r.test_case_id);return{test:c.name,type:c.prompt_type,input:c.input_message,verdict:r.verdict,score:parseFloat(r.score),reasoning:r.judge_reasoning,ms:r.execution_ms};})};
+    results:res.map(r=>{const c=getCase(r.test_case_id);return{test:c.name,type:c.prompt_type,input:c.input_message,verdict:r.verdict,score:parseFloat(r.score),reasoning:r.judge_reasoning,response:r.actual_response,ms:r.execution_ms};})};
   const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
   const a=document.createElement('a'); a.href=URL.createObjectURL(blob);
-  a.download=`qa-${run?.name?.replace(/\s+/g,'-')||'export'}.json`; a.click();
+  a.download=`horizon-qa-scan.json`; a.click();
 }
 
 init();
