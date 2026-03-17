@@ -315,7 +315,7 @@ tbody td { padding: 10px 14px; font-size: 13px; }
     <div class="section active" id="sec-overview">
       <div class="score-cards" id="scoreCards"></div>
       <div class="chart-card">
-        <h3>Score Trend by Category</h3>
+        <h3>Pass Rate & Average Score Over Time</h3>
         <div class="chart-container"><canvas id="trendChart"></canvas></div>
       </div>
     </div>
@@ -503,9 +503,11 @@ async function init() {
 
 function buildRunSelect() {
   const sel = document.getElementById('runSelect');
-  sel.innerHTML = runs.map(r => {
-    const d = new Date(r.started_at);
-    const label = `${r.name} - ${d.toLocaleDateString('en-US',{month:'short',day:'numeric'})} ${d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'})}`;
+  sel.innerHTML = runs.map((r,i) => {
+    const d = new Date(r.started_at || r.created_at);
+    const dateStr = d.getFullYear() > 1970 ? d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : 'Unknown date';
+    const timeStr = d.getFullYear() > 1970 ? d.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit',hour12:true}) : '';
+    const label = `Scan ${i+1} - ${dateStr}${timeStr ? ' at '+timeStr : ''}`;
     return `<option value="${r.id}" ${r.id===selRunId?'selected':''}>${label}</option>`;
   }).join('');
   sel.onchange = () => { selRunId=sel.value; renderAll(); };
@@ -574,26 +576,44 @@ let trendChart;
 function renderChart() {
   const ctx = document.getElementById('trendChart').getContext('2d');
   if(trendChart) trendChart.destroy();
-  const tiers = Object.keys(tierLabels);
-  const colors = ['#3b82f6','#8b5cf6','#0d9488','#ef4444','#f59e0b','#22c55e'];
+
+  const labels = runs.map((r,i) => {
+    const d = new Date(r.started_at);
+    return `Scan ${i+1} (${d.toLocaleDateString('en-US',{month:'short',day:'numeric'})})`;
+  });
+
+  const passRateData = runs.map(run => {
+    const rr = runResults(run.id);
+    return rr.length ? +(rr.filter(r=>r.verdict==='pass').length/rr.length*100).toFixed(1) : null;
+  });
+
+  const avgScoreData = runs.map(run => {
+    const rr = runResults(run.id);
+    return rr.length ? +(rr.reduce((s,r)=>s+(parseFloat(r.score)||0),0)/rr.length*100).toFixed(1) : null;
+  });
 
   trendChart = new Chart(ctx, {
     type:'line',
     data: {
-      labels: runs.map(r=>r.name.replace('Full Suite - ','')),
-      datasets: tiers.map((t,i) => ({
-        label: tierLabel(t),
-        data: runs.map(run => {
-          const rr = runResults(run.id).filter(r=>tierOf(r.test_case_id)===t);
-          return rr.length ? +(rr.reduce((s,r)=>s+(parseFloat(r.score)||0),0)/rr.length*100).toFixed(1) : null;
-        }),
-        borderColor: colors[i], backgroundColor: colors[i]+'15',
-        tension:0.3, pointRadius:5, pointHoverRadius:7, borderWidth:2
-      }))
+      labels,
+      datasets: [
+        {
+          label: 'Pass Rate',
+          data: passRateData,
+          borderColor: '#22c55e', backgroundColor: '#22c55e15',
+          tension:0.3, pointRadius:6, pointHoverRadius:8, borderWidth:2.5, fill:true
+        },
+        {
+          label: 'Average Score',
+          data: avgScoreData,
+          borderColor: '#3b82f6', backgroundColor: '#3b82f615',
+          tension:0.3, pointRadius:6, pointHoverRadius:8, borderWidth:2.5, fill:true
+        }
+      ]
     },
     options: {
       responsive:true, maintainAspectRatio:false,
-      plugins: { legend: { position:'bottom', labels: { color:'#64748b', usePointStyle:true, pointStyle:'circle', padding:16, font:{size:11} } } },
+      plugins: { legend: { position:'bottom', labels: { color:'#64748b', usePointStyle:true, pointStyle:'circle', padding:20, font:{size:12} } } },
       scales: {
         y: { min:0, max:100, grid:{color:'#f1f5f9'}, ticks:{color:'#94a3b8',callback:v=>v+'%'} },
         x: { grid:{display:false}, ticks:{color:'#94a3b8',font:{size:11}} }
@@ -667,7 +687,11 @@ function renderPrompts() {
 
 
 function renderCompetitors() {
-  if(!competitors.length) return;
+  if(!competitors.length) {
+    document.getElementById('competitorResults').innerHTML = '<div class="empty-state"><h3>No competitor comparisons yet</h3><p>Run /test with competitor mode to generate side-by-side comparisons.</p></div>';
+    return;
+  }
+  // Group by test_case_id, then by run_id for time-series
   const grouped = {};
   competitors.forEach(c => {
     if(!grouped[c.test_case_id]) grouped[c.test_case_id]={};
@@ -679,26 +703,48 @@ function renderCompetitors() {
     const tc = getCase(caseId);
     const horizon = runResults().find(r=>r.test_case_id===caseId);
     const comps = grouped[caseId];
+    const hScore = horizon ? parseFloat(horizon.score)||0 : 0;
+    const mScore = comps['mindtrip']?.quality_score ? parseFloat(comps['mindtrip'].quality_score) : null;
+    const gScore = comps['guidegeek']?.quality_score ? parseFloat(comps['guidegeek'].quality_score) : null;
+
     html += `<div class="comparison-query">${tc.input_message||tc.name}</div>
       <div class="comparison-row">
         <div class="comparison-col">
-          <h4>Horizon Concierge</h4>
-          <div class="response-text">${horizon?.judge_reasoning||'No response captured'}</div>
-          ${horizon?`<div class="comp-score" style="color:${scoreColor(parseFloat(horizon.score)||0)}">Score: ${((parseFloat(horizon.score)||0)*100).toFixed(0)}%</div>`:''}
+          <h4 style="display:flex;align-items:center;gap:8px">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--primary)"></span>
+            Horizon Concierge
+          </h4>
+          <div class="response-text">${horizon?.actual_response||horizon?.judge_reasoning||'No response captured'}</div>
+          <div style="display:flex;gap:12px;margin-top:10px;align-items:center">
+            <div class="comp-score" style="color:${scoreColor(hScore)}">Quality: ${(hScore*100).toFixed(0)}%</div>
+            ${horizon?.execution_ms?`<span style="font-size:11px;color:var(--text-dim)">${(horizon.execution_ms/1000).toFixed(1)}s</span>`:''}
+          </div>
         </div>
         <div class="comparison-col">
-          <h4>Mindtrip</h4>
+          <h4 style="display:flex;align-items:center;gap:8px">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:var(--blue)"></span>
+            Mindtrip
+          </h4>
           <div class="response-text">${comps['mindtrip']?.response_text||'Not tested'}</div>
-          ${comps['mindtrip']?`<div class="comp-score">Response: ${(comps['mindtrip'].response_time_ms/1000).toFixed(1)}s</div>`:''}
+          <div style="display:flex;gap:12px;margin-top:10px;align-items:center">
+            ${mScore!==null?`<div class="comp-score" style="color:${scoreColor(mScore)}">Quality: ${(mScore*100).toFixed(0)}%</div>`:''}
+            ${comps['mindtrip']?.response_time_ms?`<span style="font-size:11px;color:var(--text-dim)">${(comps['mindtrip'].response_time_ms/1000).toFixed(1)}s</span>`:''}
+          </div>
         </div>
         <div class="comparison-col">
-          <h4>GuideGeek</h4>
+          <h4 style="display:flex;align-items:center;gap:8px">
+            <span style="display:inline-block;width:8px;height:8px;border-radius:50%;background:#d97706"></span>
+            GuideGeek
+          </h4>
           <div class="response-text">${comps['guidegeek']?.response_text||'Not tested'}</div>
-          ${comps['guidegeek']?`<div class="comp-score">Response: ${(comps['guidegeek'].response_time_ms/1000).toFixed(1)}s</div>`:''}
+          <div style="display:flex;gap:12px;margin-top:10px;align-items:center">
+            ${gScore!==null?`<div class="comp-score" style="color:${scoreColor(gScore)}">Quality: ${(gScore*100).toFixed(0)}%</div>`:''}
+            ${comps['guidegeek']?.response_time_ms?`<span style="font-size:11px;color:var(--text-dim)">${(comps['guidegeek'].response_time_ms/1000).toFixed(1)}s</span>`:''}
+          </div>
         </div>
       </div>`;
   });
-  document.getElementById('competitorResults').innerHTML = html || '<div class="empty-state"><h3>No competitor comparisons yet</h3><p>Run /test with competitor mode to generate comparisons.</p></div>';
+  document.getElementById('competitorResults').innerHTML = html;
 }
 
 // Navigation
@@ -756,17 +802,26 @@ function showDetail(resultId) {
   const r=results.find(x=>x.id===resultId); if(!r) return;
   const c=getCase(r.test_case_id);
   const sv=parseFloat(r.score)||0;
+  const botResponse = r.actual_response || 'No response captured -- re-run this test to capture the bot response.';
   document.getElementById('modalContent').innerHTML = `
     <button class="modal-close" onclick="closeModal()">&#10005;</button>
-    <h3>${c.name||'Test Result'}</h3>
-    <div class="detail-row"><div class="detail-label">Input Query</div><div class="detail-value">${c.input_message||'Multi-turn script'}</div></div>
-    <div class="detail-row"><div class="detail-label">Type</div><div class="detail-value"><span class="badge badge-${c.prompt_type||'qa'}">${c.prompt_type||'qa'}</span></div></div>
-    <div class="detail-row"><div class="detail-label">Verdict</div><div class="detail-value"><span class="badge badge-${r.verdict}">${r.verdict}</span></div></div>
-    <div class="detail-row"><div class="detail-label">Score</div><div class="detail-value" style="font-weight:700;font-size:18px;color:${scoreColor(sv)}">${(sv*100).toFixed(0)}%</div></div>
-    <div class="detail-row"><div class="detail-label">Reasoning</div><div class="detail-value">${r.judge_reasoning||'No reasoning'}</div></div>
-    <div class="detail-row"><div class="detail-label">Response Time</div><div class="detail-value">${r.execution_ms?(r.execution_ms/1000).toFixed(1)+'s':'-'}</div></div>
+    <h3 style="margin-bottom:20px">${c.input_message||c.name||'Test Result'}</h3>
+    <div style="display:flex;gap:12px;margin-bottom:20px">
+      <span class="badge badge-${c.prompt_type||'qa'}">${c.prompt_type||'qa'}</span>
+      <span class="badge badge-${r.verdict}">${r.verdict}</span>
+      <span style="font-weight:700;font-size:14px;color:${scoreColor(sv)}">${(sv*100).toFixed(0)}%</span>
+      ${r.execution_ms?`<span style="font-size:13px;color:var(--text-dim)">${(r.execution_ms/1000).toFixed(1)}s</span>`:''}
+    </div>
+    <div style="margin-bottom:20px">
+      <div style="font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px">Bot Response</div>
+      <div style="background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:16px;font-size:13px;line-height:1.7;max-height:300px;overflow-y:auto;white-space:pre-wrap">${botResponse}</div>
+    </div>
+    <div style="margin-bottom:16px">
+      <div style="font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px">Judge Reasoning</div>
+      <div style="font-size:13px;line-height:1.6;color:var(--text-dim)">${r.judge_reasoning||'No reasoning'}</div>
+    </div>
     ${c.expected_intent?`<div class="detail-row"><div class="detail-label">Expected Intent</div><div class="detail-value">${c.expected_intent}</div></div>`:''}
-    ${c.evaluation_criteria?`<div class="detail-row"><div class="detail-label">Eval Criteria</div><div class="detail-value"><pre style="white-space:pre-wrap;font-size:12px;color:var(--text-dim);background:var(--bg);padding:12px;border-radius:8px">${JSON.stringify(c.evaluation_criteria,null,2)}</pre></div></div>`:''}
+    ${c.evaluation_criteria?`<div style="margin-top:12px"><div style="font-size:12px;font-weight:600;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.3px;margin-bottom:8px">Eval Criteria</div><pre style="white-space:pre-wrap;font-size:12px;color:var(--text-dim);background:var(--bg);padding:12px;border-radius:8px">${JSON.stringify(c.evaluation_criteria,null,2)}</pre></div>`:''}
   `;
   document.getElementById('modalOverlay').classList.add('visible');
 }
