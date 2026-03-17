@@ -828,8 +828,102 @@ function showDetail(resultId) {
 function closeModal() { document.getElementById('modalOverlay').classList.remove('visible'); }
 document.addEventListener('keydown', e => { if(e.key==='Escape') closeModal(); });
 
-function generatePrompts() {
-  alert('Prompt generation runs via the /test skill in Cowork.\\n\\nRun: /test\\nThen select "Generate Prompts" to create AI-generated test queries for ' + document.getElementById('genDestination').value);
+async function generatePrompts() {
+  const dest = document.getElementById('genDestination').value.trim() || 'Fort Myers';
+  const count = parseInt(document.getElementById('genCount').value) || 100;
+  const split = document.getElementById('genSplit').value;
+  const [qaPct, itPct] = split.split('-').map(Number);
+  const qaCount = Math.round(count * qaPct / 100);
+  const itCount = count - qaCount;
+
+  const qaTemplates = [
+    `What are the best restaurants near ${dest}?`,
+    `Is there free parking at ${dest} Beach?`,
+    `What can we do in ${dest} if it rains?`,
+    `Where can I find live music in ${dest}?`,
+    `What are the hours for popular attractions in ${dest}?`,
+    `Where should my family eat dinner near ${dest}? We have kids.`,
+    `What are the best beaches in ${dest}?`,
+    `Are there any farmers markets in ${dest}?`,
+    `Where can I rent kayaks or paddleboards in ${dest}?`,
+    `What is the best time of year to visit ${dest}?`,
+    `Are there any pet-friendly beaches in ${dest}?`,
+    `Where can I watch the sunset in ${dest}?`,
+    `What shopping areas are near ${dest}?`,
+    `Is Uber or Lyft available in ${dest}?`,
+    `What wildlife can I see in ${dest}?`,
+    `Are there any guided tours in ${dest}?`,
+    `Where can I go shelling near ${dest}?`,
+    `What festivals or events happen in ${dest}?`,
+    `How far is ${dest} from Miami?`,
+    `What is there to do at night in ${dest}?`,
+    `Are there any day trips from ${dest}?`,
+    `Where can I find the best seafood in ${dest}?`,
+    `Is ${dest} good for a retirement trip?`,
+    `What water sports are available in ${dest}?`,
+    `Where can I go fishing in ${dest}?`,
+    `Are there bike trails near ${dest}?`,
+    `What museums are in ${dest}?`,
+    `Where is the closest airport to ${dest}?`,
+    `Can I take a boat tour from ${dest}?`,
+    `What are some free things to do in ${dest}?`
+  ];
+
+  const itTemplates = [
+    `Plan a 4-day trip to ${dest} for my wife and me. We love seafood and sunsets.`,
+    `Plan me a trip to ${dest}.`,
+    `My family of four wants to visit ${dest} in October. What should we do?`,
+    `I want a 3-day adventure trip with paddleboarding and wildlife tours near ${dest}.`,
+    `Surprise romantic weekend getaway near ${dest}. She loves the beach and spas.`,
+    `Plan a week-long trip to ${dest} for a group of 6 friends in their 30s.`,
+    `I have 2 days in ${dest} with my elderly parents. Plan something relaxed.`,
+    `Create a 5-day itinerary for ${dest} focused on nature and eco-tourism.`,
+    `Plan a budget-friendly 3-day trip to ${dest} for a solo traveler.`,
+    `We want a luxury long weekend in ${dest} with fine dining and spa.`,
+    `Plan a spring break trip to ${dest} for a family with teenagers.`,
+    `I am visiting ${dest} for a work conference but have 2 free afternoons.`,
+    `Create a foodie itinerary for ${dest} -- 3 days, just great restaurants and food experiences.`,
+    `Plan a trip to ${dest} focused on history and culture.`,
+    `My partner and I want a laid-back beach vacation in ${dest} for 5 days in January.`,
+    `Plan an active outdoor trip to ${dest} with hiking, biking, and water sports.`,
+    `I want to explore ${dest} like a local for 4 days.`,
+    `Create a wellness retreat itinerary for ${dest} -- yoga, healthy food, nature.`,
+    `Plan a girls' weekend in ${dest} with shopping, brunch, and beach time.`,
+    `We are bringing our dog on a 3-day trip to ${dest}. Plan something pet-friendly.`
+  ];
+
+  // Shuffle and pick
+  const shuffle = a => { for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; };
+  const qaPrompts = shuffle([...qaTemplates]).slice(0, Math.min(qaCount, qaTemplates.length));
+  const itPrompts = shuffle([...itTemplates]).slice(0, Math.min(itCount, itTemplates.length));
+
+  const qaSuite = suites.find(s=>s.tier==='intent_classification');
+  const itSuite = suites.find(s=>s.tier==='recipe_completeness');
+  if(!qaSuite || !itSuite) { alert('Missing test suites. Check Supabase.'); return; }
+
+  const allPrompts = [
+    ...qaPrompts.map(p => ({ suite_id: qaSuite.id, client_id:'11111111-1111-1111-1111-111111111111', name: p.substring(0,60), input_message: p, prompt_type:'qa', is_generated:true, is_active:true })),
+    ...itPrompts.map(p => ({ suite_id: itSuite.id, client_id:'11111111-1111-1111-1111-111111111111', name: p.substring(0,60), input_message: p, prompt_type:'itinerary', is_generated:true, is_active:true }))
+  ];
+
+  try {
+    const res = await fetch(`${SB_URL}/rest/v1/test_cases`, {
+      method:'POST',
+      headers: { 'apikey':SB_KEY, 'Authorization':`Bearer ${SB_KEY}`, 'Content-Type':'application/json', 'Prefer':'return=representation' },
+      body: JSON.stringify(allPrompts)
+    });
+    const data = await res.json();
+    if(Array.isArray(data) && data.length) {
+      cases.push(...data);
+      renderPrompts();
+      alert(`Generated ${data.length} prompts (${qaPrompts.length} Q&A + ${itPrompts.length} Itinerary) for ${dest}`);
+    } else {
+      alert('Failed to generate prompts. Check console for errors.');
+      console.error(data);
+    }
+  } catch(e) {
+    alert('Error generating prompts: '+e.message);
+  }
 }
 
 async function addManualPrompt() {
